@@ -13,8 +13,9 @@
 </head>
 <body>
 <div id='container'>
-    <div id='nav'>
-        <div class='row'>
+    
+    <div class='row col-md-offset-1'>
+        <div id='nav'>
             <h3>Test App</h3>
             <a href='/'>Home</a>
             <a href='/'>Sign In</a>
