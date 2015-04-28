@@ -17,9 +17,9 @@
 		<div id='nav'>
 			<div class='row'>
 				<a href="">Test App</a>
-				<a href="">Dashboard</a>
+				<a href='/admindashboard/index'>Dashboard</a>
 				<a href="/normaldashboard/editprofile">Profile</a>
-				<a href="">Wall</a>
+				<a href="/normaldashboard/view_wall/<?=$this->session->userdata("userid")?>">Wall</a>
 				<a href="/signins/logoff">Log off</a>
 			</div>
 		</div>

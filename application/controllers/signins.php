@@ -68,7 +68,7 @@ class Signins extends CI_Controller {
         {
             $this->session->set_userdata('userid',$check[1]);
 
-            if ($check)
+            if ($check[0])
             {
                 $this->session->set_userdata('admin','admin');
                 redirect('/admindashboard/index');
@@ -88,7 +88,7 @@ class Signins extends CI_Controller {
     }
 
     public function logoff(){
-        $this->session->set_userdata('admin', 'normal');
+        $this->session->sess_destroy();
         redirect('/');
     }
 

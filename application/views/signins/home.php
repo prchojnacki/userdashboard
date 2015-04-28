@@ -22,7 +22,7 @@
         <li><a href='/'>Home</a></li>
     </ul>
     <ul class='nav navbar-nav navbar-right'>
-        <li><a href='/signins/registerpage'>Sign In</a></li>
+        <li><a href='/signins/signinpage'>Sign In</a></li>
     </ul>
 </div>
     <div class='row'>

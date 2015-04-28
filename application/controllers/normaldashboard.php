@@ -7,6 +7,7 @@ class Normaldashboard extends CI_Controller {
         parent::__construct();
         // $this->output->enable_profiler();
         $this->load->model('Signin');
+        $this->load->model('Wall');
     }
 
     public function index() {
@@ -65,7 +66,10 @@ class Normaldashboard extends CI_Controller {
         }
     }
     public function view_wall($profile_id) {
-        $this->load->view('normaldashboard/wall', array('profile_id' => $profile_id));
+        $user_info = $this->Signin->get_user_by_id($profile_id);
+        $messages = $this->Wall->get_messages($profile_id);
+        $comments = $this->Wall->get_comments($profile_id);
+        $this->load->view('normaldashboard/wall', array('profile_id' => $profile_id, 'user_info'=>$user_info, 'messages'=>$messages, 'comments'=>$comments));
     }
 
 }

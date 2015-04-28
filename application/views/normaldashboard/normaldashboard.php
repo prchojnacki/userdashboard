@@ -17,9 +17,9 @@
         <div class='row'>
             <h3>Test App</h3>
             <a href='/'>Home</a>
-            <a href='/'>Log Off</a>
-            <a href='/'>Profile</a>
-            <a href='/'>Wall</a>
+            <a href='/signins/logoff'>Log Off</a>
+            <a href='/normaldashboard/editprofile'>Profile</a>
+            <a href='/normaldashboard/view_wall/<?=$this->session->userdata("userid")?>'>Wall</a>
         </div>
     </div>
     <h1>All Users</h1>

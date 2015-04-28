@@ -36,7 +36,7 @@ class Signin extends CI_Model {
     }
 
     public function get_user_by_id($id) {
-    	return $this->db->query("SELECT email, first_name, last_name, created_at, user_level FROM users WHERE id=?", $id)->row_array();
+    	return $this->db->query("SELECT * FROM users WHERE id=?", $id)->row_array();
     }
 
     public function update_user($posts){
