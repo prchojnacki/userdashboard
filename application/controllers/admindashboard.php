@@ -47,4 +47,32 @@ class Admindashboard extends CI_Controller {
         $this->Signin->remove_user($id);
         redirect('/admindashboard/index');
     }
+
+    public function edit_user($id) {
+        $user = $this->Signin->get_user_by_id($id);
+        $this->load->view('admindashboard/edit_user',array('user'=>$user,'id'=>$id));
+    }
+
+    public function change_user_info() {
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('email', 'Email', 'trim|required');
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
+        if($this->form_validation->run()) {
+            $id = $this->input->post('id');
+            $posts = array(set_value('email'), set_value('first_name'), set_value('last_name'), $this->input->post('level'), $id); 
+            $path = '/admindashboard/edit_user/' . $id;           
+            $this->Signin->update_user($posts);
+            redirect($path);
+        }
+        else {
+            $id = $this->input->post('id');
+            $path = '/admindashboard/edit_user/' . $id; 
+            $this->session->set_flashdata('registration_errors', validation_errors());
+            redirect($path);
+        }
+
+    }
 }

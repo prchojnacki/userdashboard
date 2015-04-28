@@ -52,7 +52,7 @@
 							echo "normal";
 						} else echo "admin";
 					?></td>
-					<td><a href="">edit</a> <a href="/admindashboard/remove_user/<?= $user['id'] ?>">remove</a></td>
+					<td><a href="/admindashboard/edit_user/<?= $user['id']?>">edit</a> <a href="/admindashboard/remove_user/<?= $user['id'] ?>">remove</a></td>
 				</tr>
 
 	<?php
