@@ -40,14 +40,14 @@ class Signin extends CI_Model {
     }
 
     public function update_user($posts){
-    	if($posts[3]=="Admin"){
+    	if($posts[3]=="admin"){
     		$level = 1;
     	}
     	else {
     		$level = 0;
     	}
     	return $this->db->query("UPDATE users SET email=?, first_name=?, last_name = ?, user_level = ? WHERE id = ?", 
-    		array($posts[0], $posts[1], $posts[2], $level, $posts[3]));
+    		array($posts[0], $posts[1], $posts[2], $level, $posts[4]));
     }
     public function update_user_password($id, $password){
         return $this->db->query("UPDATE users SET password = ? WHERE id = ?", array($password, $id));
