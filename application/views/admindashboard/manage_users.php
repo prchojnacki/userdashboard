@@ -20,11 +20,11 @@
 				<a href="">Dashboard</a>
 				<a href="">Profile</a>
 				<a href="">Wall</a>
-				<a href="">Log off</a>
+				<a href="/signins/signinpage">Log off</a>
 			</div>
 		</div>
 		<h1>Manage Users</h1>
-		<form>
+		<form action='/admindashboard/newuser' method='post'>
 			<input class = 'btn btn-primary' type='submit' value='Add New'>
 		</form>
 		<table class='table table-striped'>
@@ -39,16 +39,34 @@
 				</tr>
 			</thead>
 			<tbody>
+	<?php  
+			foreach($userquery as $user) {
+	 ?>		
 				<tr>
-					<td>1</td>
-					<td>Michael Choi</td>
-					<td>michael@village88.com</td>
-					<td>Dec 24th 2012</td>
-					<td>admin</td>
-					<td><a href="">edit</a> <a href="">remove</a></td>
+					<td><?= $user['id'] ?></td>
+					<td><a href=''><?= $user['first_name'] . " " . $user['last_name'] ?></a></td>
+					<td><?= $user['email'] ?></td>
+					<td><?= $user['created_at'] ?></td>
+					<td><?php
+						if( $user['user_level'] == 0) {
+							echo "normal";
+						} else echo "admin";
+					?></td>
+					<td><a href="">edit</a> <a href="/admindashboard/remove_user/<?= $user['id'] ?>">remove</a></td>
 				</tr>
+
+	<?php
+		}
+	?>
 			</tbody>
 		</table>
 	</div>
+
+
+
+
+
+
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 class Signin extends CI_Model {
 
     public function register($posts){
-    $this->db->query("INSERT INTO users (email, first_name, last_name, password, user_level) VALUES (?,?,?,?, 0)", $posts);
+    $this->db->query("INSERT INTO users (email, first_name, last_name, password, created_at, user_level) VALUES (?,?,?,?, NOW(), 0)", $posts);
     $query = 'SELECT id FROM users WHERE email = ?';
     $user = $this->db->query($query, $posts[0])->row_array();
     if($user['id']==1)
@@ -15,7 +15,7 @@ class Signin extends CI_Model {
     return $id['user_level'];
 
     }
-    public function check_signin($email, $password) {
+    public function check_signin ($email, $password) {
     	$user = $this->db->query("SELECT password, user_level FROM users WHERE email = ?", $email)->row_array();
     	if (!empty($user) && $user['password']==$password)
     	{
@@ -25,5 +25,13 @@ class Signin extends CI_Model {
     	{
     		return "Incorrect email/password combination";
     	}
+    }
+
+    public function load_all_users (){
+        return $this->db->query("SELECT id, email, first_name, last_name, created_at, user_level FROM users")->result_array();
+    }
+
+    public function remove_user($id) {
+        return $this->db->query("DELETE FROM users WHERE id = ?", $id);
     }
 }

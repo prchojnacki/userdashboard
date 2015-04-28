@@ -24,10 +24,10 @@
 			</div>
 		</div>
 		<h1>Add a new user</h1>
-		<form>
+		<form action='/admindashboard/index' method='post'>
 			<input class = 'btn btn-primary' type='submit' value='Return to Dashboard'>
 		</form>
-		<form>
+		<form action='/admindashboard/create_new_user' method='post'>
 			<label>Email Address: <input type='text' name='email'></label>
 			<label>First Name: <input type='text' name='first_name'></label>
 			<label>Last Name: <input type='text' name='last_name'></label>
@@ -35,6 +35,15 @@
 			<label>Confirm Password: <input type='password' name='confirm'></label>
 			<input class = 'btn btn-success' type='submit' value = 'Create'>
 		</form>
+	
+	<?php if ($this->session->flashdata('registration_errors')) {
+		echo $this->session->flashdata('registration_errors');
+	} elseif(isset($message)) {
+		echo $message;
+	}
+?>
+
+
 	</div>
 </body>
 </html>

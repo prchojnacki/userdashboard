@@ -5,7 +5,7 @@ class Signins extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->output->enable_profiler();
+        // $this->output->enable_profiler();
         $this->load->model('Signin');
     }
 
@@ -38,11 +38,11 @@ class Signins extends CI_Controller {
 
             if($id)
             {
-                $this->load->view('admindashboard/manage_users');
+                redirect('/admindashboard/index');
             }
             else
             {
-                $this->load->view('normaldashboard/normaldashboard');
+                redirect('/normaldashboard/index');
             }
         }
         else {
@@ -59,18 +59,21 @@ class Signins extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required|md5');
         $this->form_validation->run();
+        
         $check = $this->Signin->check_signin(set_value('email'), set_value('password'));
+
+
         if (count($check)==1)
         {
             if ($check)
             {
                 $this->session->set_userdata('admin','admin');
-                $this->load->view('admindashboard/manage_users');
+                redirect('/admindashboard/index');
             }
             else
             {
                 $this->session->set_userdata('admin','normal');
-                $this->load->view('normaldashboard/normaldashboard');
+                redirect('/normaldashboard/index');
             }
         }
         else
