@@ -6,6 +6,7 @@ class Signins extends CI_Controller {
     {
         parent::__construct();
         $this->output->enable_profiler();
+        $this->load->model('Signin');
     }
 
     public function index()
@@ -21,33 +22,62 @@ class Signins extends CI_Controller {
     public function registration(){
 
         $this->load->helper(array('form', 'url'));
-        $this->load->library('form_valdation');
+        $this->load->library('form_validation');
 
         $this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[users.email]');
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|md5');
-        $this->form_validation->set_rules('confirm', 'Confirm', 'required|md5|matches[password]');
-
+        $this->form_validation->set_rules('confirm', 'Confirm', 'required|matches[password]');
+     
         if($this->form_validation->run()) {
             // register and login user
-            $post = array($email, $first_name, $last_name, $password);
-        }
+            $posts = array(set_value('email'), set_value('first_name'), set_value('last_name'), set_value('password'));
+            
+            $id = $this->Signin->register($posts);
 
+            if($id)
+            {
+                $this->load->view('admindashboard/manage_users');
+            }
+            else
+            {
+                $this->load->view('normaldashboard/normaldashboard');
+            }
+        }
         else {
+
             $this->session->set_flashdata('registration_errors', validation_errors());
-            redirect('/');
+            redirect('/signins/registerpage');
         }
     }
     public function signin(){
         $post = $this->input->post();
         $this->load->helper(array('form', 'url'));
-        $this->load->library('form_valdation');
+        $this->load->library('form_validation');
 
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required|md5');
-
-
+        $this->form_validation->run();
+        $check = $this->Signin->check_signin(set_value('email'), set_value('password'));
+        if (count($check)==1)
+        {
+            if ($check)
+            {
+                $this->session->set_userdata('admin','admin');
+                $this->load->view('admindashboard/manage_users');
+            }
+            else
+            {
+                $this->session->set_userdata('admin','normal');
+                $this->load->view('normaldashboard/normaldashboard');
+            }
+        }
+        else
+        {
+            $this->session->set_flashdata('login_error',$check);
+            $this->load->view('signins/signin');
+        }
 
     }
 

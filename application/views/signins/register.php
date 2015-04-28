@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign In</title>
+    <title>Register</title>
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -24,13 +24,22 @@
         <li><a href='/signins/signinpage'>Sign In</a></li>
     </ul>
 </div>
-    <h1>Sign In</h1>
-    <form action='/signins/signin' method='post'>
+    <?php 
+        if ($this->session->flashdata('registration_errors')){
+            echo $this->session->flashdata('registration_errors');
+        }
+
+    ?>
+    <h1>Register</h1>
+    <form action='/signins/registration' method='post'>
         <label>Email Address:<input type='text' name='email'></label>
+        <label>First Name:<input type='text' name='first_name'></label>
+        <label>Last Name:<input type='text' name='last_name'></label>
         <label>Password:<input type='password' name='password'></label>
-        <input type='submit' value='Sign In'>
+        <label>Password Confirmation:<input type='password' name='confirm'></label>
+        <input type='submit' value='Register'>
     </form>
-    <a href='/'>Don't have an account? Register.</a>
+    <a href='/signins/signinpage'>Already have an account? Sign in.</a>
 </div>
 </nav>
 </body>
