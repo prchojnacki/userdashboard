@@ -35,6 +35,25 @@
             </tr>
         </thead>
         <tbody>
+    <?php  
+            foreach($userquery as $user) {
+    ?>     
+                <tr>
+                    <td><?= $user['id'] ?></td>
+                    <td><a href='/normaldashboard/wall/<?= $user['id'] ?>'><?= $user['first_name'] . " " . $user['last_name'] ?></a></td>
+                    <td><?= $user['email'] ?></td>
+                    <td><?= $user['created_at'] ?></td>
+                    <td><?php
+                        if($user['user_level'] == 0) {
+                            echo "normal";
+                        } else echo "admin";
+                    ?>
+
+                    </td>
+                </tr>
+    <?php
+        }
+    ?>
         </tbody>
     </table>
 

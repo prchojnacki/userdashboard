@@ -12,14 +12,14 @@ class Signin extends CI_Model {
     	$this->db->query($query);
     }
     $id = $this->db->query('SELECT user_level FROM users WHERE id=?',$user['id'])->row_array();
-    return $id['user_level'];
+    return array($id['user_level'], $user['id']);
 
     }
     public function check_signin ($email, $password) {
-    	$user = $this->db->query("SELECT password, user_level FROM users WHERE email = ?", $email)->row_array();
+    	$user = $this->db->query("SELECT password, user_level, id FROM users WHERE email = ?", $email)->row_array();
     	if (!empty($user) && $user['password']==$password)
     	{
-    		return $user['user_level'];
+    		return array($user['user_level'], $user['id']);
     	}
     	else
     	{
@@ -47,6 +47,23 @@ class Signin extends CI_Model {
     		$level = 0;
     	}
     	return $this->db->query("UPDATE users SET email=?, first_name=?, last_name = ?, user_level = ? WHERE id = ?", 
-    		array($posts[0], $posts[1], $posts[2], $level, $posts[4]));
+    		array($posts[0], $posts[1], $posts[2], $level, $posts[3]));
     }
+    public function update_user_password($id, $password){
+        return $this->db->query("UPDATE users SET password = ? WHERE id = ?", array($password, $id));
+    }
+
+    public function update_profile($post){
+
+        return $this->db->query("UPDATE users SET email = ?, first_name = ?, last_name = ?, description = ? WHERE id = ?", 
+            array($post[0], $post[1], $post[2], $post[3], $this->session->userdata('userid')));
+    }
+
+    public function update_password($password){
+        return $this->db->query("UPDATE users SET password = ? WHERE id = ?", 
+            array($password, $this->session->userdata('userid')));
+    }
+
+
+
 }

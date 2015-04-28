@@ -40,7 +40,8 @@
 			<input class = 'btn btn-success' type='submit' value = 'Save'>
 		</form>
 		<h3>Change Password</h3>
-		<form>
+		<form action='/admindashboard/change_user_password' method='post'>
+			<input type='hidden' name='id' value='<?=$id?>'>
 			<label>Password: <input type='text' name='password'></label>
 			<label>Confirm Password: <input type='text' name='confirm'></label>
 			<input class = 'btn btn-success' type='submit' value = 'Update Password'>

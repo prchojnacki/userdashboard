@@ -73,6 +73,35 @@ class Admindashboard extends CI_Controller {
             $this->session->set_flashdata('registration_errors', validation_errors());
             redirect($path);
         }
-
     }
+
+    public function change_user_password(){
+        $this->load->helper(array('form', 'url'));
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|md5');
+        $this->form_validation->set_rules('confirm', 'Confirm Password', 'required|matches[password]');
+        
+        $post = $this->input->post();
+        $id = $post['id'];
+        $path = "/admindashboard/edit_user/$id";
+
+        if($this->form_validation->run()){
+
+            $password = set_value('password');
+            $this->Signin->update_user_password($id, $password);
+            
+            redirect($path);
+        }
+        else {
+
+            redirect($path);
+        }
+    }
+
+
+
+
+
+
 }

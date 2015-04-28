@@ -36,8 +36,9 @@ class Signins extends CI_Controller {
             
             $id = $this->Signin->register($posts);
 
-            if($id)
+            if($id[0] == 1)
             {
+                $this->session->set_userdata('userid', $id[1]);
                 redirect('/admindashboard/index');
             }
             else
@@ -63,8 +64,10 @@ class Signins extends CI_Controller {
         $check = $this->Signin->check_signin(set_value('email'), set_value('password'));
 
 
-        if (count($check)==1)
+        if (is_array($check))
         {
+            $this->session->set_userdata('userid',$check[1]);
+
             if ($check)
             {
                 $this->session->set_userdata('admin','admin');
@@ -82,6 +85,11 @@ class Signins extends CI_Controller {
             $this->load->view('signins/signin');
         }
 
+    }
+
+    public function logoff(){
+        $this->session->set_userdata('admin', 'normal');
+        redirect('/');
     }
 
 }
