@@ -11,59 +11,84 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<style type="text/css">
-		body {
-			padding: 0em 5em;
-		}
-	</style>
+	<link rel='stylesheet' href='/assets/main.css'>
 </head>
 <body>
-	<div id='container'>
-		<div id='nav'>
-			<div class='row'>
-				<a href="">Test App</a>
-		<?php
-				if ($this->session->userdata('admin') == 'admin') {
+    <nav class='navbar navbar-default'>
+    <div class='collapse navbar-collapse'>
+        <ul class='nav navbar-nav'>
+            <li><a href=''>Test App</a></li>
+        <?php
+			if ($this->session->userdata('admin') == 'admin') {
         ?>
-            <a href='/admindashboard/index'>Dashboard</a>
+            <li><a href='/admindashboard/index'>Dashboard</a></li>
         <?php
             } else {
         ?>
-            <a href='/normaldashboard/index'>Dashboard</a>
+            <li><a href='/normaldashboard/index'>Dashboard</a></li>
         <?php
             }
         ?>
-				<a href="/normaldashboard/editprofile">Profile</a>
-				<a href="/normaldashboard/view_wall/<?=$this->session->userdata("userid")?>">Wall</a>
-				<a href="/signins/logoff">Log off</a>
-			</div>
-		</div>
+            <li><a href="/normaldashboard/editprofile">Profile</a></li>
+            <li><a href="/normaldashboard/view_wall/<?=$this->session->userdata("userid")?>">Wall</a></li>
+        </ul>
+        <ul class='nav navbar-nav navbar-right'>
+            <li><a href="/signins/logoff">Log off</a></li>
+        </ul>
+    </div>
+    </nav>
+
+	<div class='container'>
 		<h2><?=$user_info['first_name']?> <?=$user_info['last_name']?></h2>
-		<p>Registered at: <?=$user_info['created_at']?></p>
+		<p>Registered on: <?php echo mdate('%F %d%S %Y', human_to_unix($user_info['created_at']));?></p>
 		<p>Email address: <?=$user_info['email']?></p>
 		<p>Description: <?=$user_info['description']?></p>
 		<h2>Leave a message for <?=$user_info['first_name']?></h2>
-		<form action='/walls/new_message' method='post'>
-			<input type='hidden' name='recipient_id' value = '<?=$user_info['id']?>'>
-			<textarea class='form-control' rows='3' name='message'></textarea>
-			<input class = 'btn btn-success' type='submit' value = 'Post'>
-		</form>
+		<div class='row'>
+			<form action='/walls/new_message' method='post'>
+				<div class='form-group'>
+					<input type='hidden' name='recipient_id' value = '<?=$user_info['id']?>'>
+					<div class='col-sm-9'>
+						<textarea class='form-control' rows='4' name='message'></textarea>
+					</div>
+					<div class='col-sm-3 col-sm-offset-8'>
+						<input class = 'btn btn-success' type='submit' value = 'Post'>
+					</div>
+				</div>
+			</form>
+		</div>
 		<?php foreach ($messages as $message) { ?>
-		<p><a href='/normaldashboard/view_wall/<?=$message["user_id"]?>'><?= $message['first_name']?> <?= $message['last_name']?></a> wrote: </p>
-		<p><?php echo timespan(human_to_unix($message['created_at']), time())?> ago</p>
-		<div><?=$message['message']?></div>
-			<?php foreach ($comments as $comment) { ?>
-			<?php if ($message['id']==$comment['message_id']) { ?>
-			<p><a href='/normaldashboard/view_wall/<?=$comment["user_id"]?>'><?= $comment['name']?></a> wrote: </p>
-			<p><?php echo timespan(human_to_unix($comment['created_at']), time())?> ago</p>
-			<div><?= $comment['comment']?></div>
-			<?php } } ?>
+		<div class='message_box row'>
+			<p class='col-md-8'><a href='/normaldashboard/view_wall/<?=$message["user_id"]?>'><?= $message['first_name']?> <?= $message['last_name']?></a> wrote: </p>
+			<p class='col-md-4'><?php echo timespan(human_to_unix($message['created_at']), time())?> ago</p>
+		</div>
+		<div class='message'>
+			<?=$message['message']?>
+		</div>
+		<?php foreach ($comments as $comment) { ?>
+		<?php if ($message['id']==$comment['message_id']) { ?>
+		<div class='comment_box'>
+			<div class='row'>
+				<p class='col-md-8'><a href='/normaldashboard/view_wall/<?=$comment["user_id"]?>'><?= $comment['name']?></a> wrote: </p>
+				<p class='col-md-4'><?php echo timespan(human_to_unix($comment['created_at']), time())?> ago</p>
+			</div>
+			<div class='comment'>
+				<?= $comment['comment']?>
+			</div>
+		</div>
+		<?php } } ?>
+		<div class='row'>
 			<form action='/walls/new_comment' method='post'>
 				<input type='hidden' name='recipient_id' value = '<?=$user_info['id']?>'>
 				<input type='hidden' name='message_id' value = '<?=$message["id"]?>'>
-				<textarea class='form-control' rows='3' name='comment' placeholder='Leave a comment'></textarea>
-				<input class = 'btn btn-success' type='submit' value = 'Post'>
+				<div class='col-sm-9 col-sm-offset-1'>
+					<textarea class='form-control' rows='4' name='comment' placeholder='Leave a comment'></textarea>
+				</div>
+				<div class='col-sm-3 col-sm-offset-9'>
+					<input class = 'btn btn-success' type='submit' value = 'Post'>
+				</div>
 			</form>
+		</div>
 		<?php } ?>
 	</div>
 
