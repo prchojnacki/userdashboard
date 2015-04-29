@@ -16,7 +16,6 @@
 <nav class='navbar navbar-default'>
     <div class='collapse navbar-collapse'>
         <ul class='nav navbar-nav'>
-            <li><a>Test App</a></li>
             <li><a href='/'>Home</a></li>
         </ul>
         <ul class='nav navbar-nav navbar-right'>

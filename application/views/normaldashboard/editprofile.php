@@ -16,7 +16,6 @@
 <nav class='navbar navbar-default'>
     <div class='collapse navbar-collapse'>
         <ul class='nav navbar-nav'>
-            <li><a href=''>Test App</a></li>
             <?php
                 if ($this->session->userdata('admin') == 'admin') {
             ?>
@@ -24,11 +23,11 @@
             <?php
             } else {
             ?>
-            <a href='/normaldashboard/index'>Home</a>
+            <li><a href='/normaldashboard/index'>Dashboard</a></li>
             <?php
             }
             ?>
-            <li><a href="/normaldashboard/editprofile">Profile</a></li>
+            <li><a href="/normaldashboard/editprofile">Account</a></li>
             <li><a href="/normaldashboard/view_wall/<?=$this->session->userdata("userid")?>">Wall</a></li>
         </ul>
         <ul class='nav navbar-nav navbar-right'>
@@ -36,11 +35,12 @@
         </ul>
     </div>
 </nav>
+
 <div class='container-fluid'>
         
     <div class='row'>
         <h1 class='col-sm-9 col-sm-offset-1'>Edit profile</h1>
-        <form action='/normaldashbard/index' method='post' class='col-sm-1'>
+        <form action='/normaldashboard/index' method='post' class='col-sm-1'>
             <input class = 'btn btn-primary' type='submit' value='Return to Dashboard'>
         </form>
     </div>

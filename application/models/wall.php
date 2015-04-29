@@ -9,7 +9,7 @@ class Wall extends CI_Model {
 	}
 
 	public function get_messages($profile_id) {
-		$query = 'SELECT messages.*, users.first_name, users.last_name FROM messages JOIN users ON users.id = messages.user_id WHERE recipient_id = ?';
+		$query = 'SELECT messages.*, users.first_name, users.last_name FROM messages JOIN users ON users.id = messages.user_id WHERE recipient_id = ? ORDER BY messages.id DESC';
 		return $this->db->query($query, $profile_id)->result_array();
 	}
 

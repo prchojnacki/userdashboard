@@ -43,6 +43,7 @@ class Signins extends CI_Controller {
             }
             else
             {
+                $this->session->set_userdata('userid', $id[1]);
                 redirect('/normaldashboard/index');
             }
         }

@@ -31,7 +31,7 @@ class Signin extends CI_Model {
         return $this->db->query("SELECT id, email, first_name, last_name, created_at, user_level FROM users")->result_array();
     }
 
-    public function remove_user($id) {
+    public function remove_user($id) { 
         return $this->db->query("DELETE FROM users WHERE id = ?", $id);
     }
 

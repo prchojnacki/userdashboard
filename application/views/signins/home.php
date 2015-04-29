@@ -18,7 +18,7 @@
 <nav class='navbar navbar-default'>
     <div class='collapse navbar-collapse'>
         <ul class='nav navbar-nav'>
-            <li><a>Test App</a></li>
+
             <li><a href='/'>Home</a></li>
         </ul>
         <ul class='nav navbar-nav navbar-right'>
@@ -30,23 +30,23 @@
 <div class='container-fluid'>
     
     <div class='jumbotron'>
-        <h1>Welcome to the Test!</h1>
-        <p>We're going to build a cool applicatin using a MVC framework! This application was built with the Village88 folks!</p>
-        <button class='btn btn-default'><a href='/signins/signinpage'>Start</a></button>
+        <h1>Welcome to the User Dashboard!</h1>
+        <p>This cool application was built using the CodeIgniter MVC framework! Courtesy of Paula and Shain!</p>
+        <button class='btn btn-default'><a href='/signins/registerpage'>Start</a></button>
     </div>
 
     <div class='row-fluid'>
         <div class='col-md-4'>
             <h5>Manage Users</h5>
-            <p>Using this application, you'll learn how to add, remove, and edit users for the application.</p>
+            <p>In the User Dashboard, administrators can add, remove, and edit users for the application.</p>
         </div>
         <div class='col-md-4'>
             <h5>Leave messages</h5>
-            <p>Users will be able to leave a message to another user using this application.</p>
+            <p>Users will be able to leave messages for each user on their customizable profile pages.</p>
         </div>
         <div class='col-md-4'>
             <h5>Edit User Information</h5>
-            <p>Admins will ge able to edit another user's information (email address, first name, last name, etc)</p>
+            <p>Admins can edit each others' information (email address, first name, last name, etc).</p>
         </div>
     </div>
 </div>

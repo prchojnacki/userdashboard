@@ -17,7 +17,6 @@
     <nav class='navbar navbar-default'>
     <div class='collapse navbar-collapse'>
         <ul class='nav navbar-nav'>
-            <li><a href=''>Test App</a></li>
         <?php
 			if ($this->session->userdata('admin') == 'admin') {
         ?>
@@ -29,7 +28,7 @@
         <?php
             }
         ?>
-            <li><a href="/normaldashboard/editprofile">Profile</a></li>
+            <li><a href="/normaldashboard/editprofile">Account</a></li>
             <li><a href="/normaldashboard/view_wall/<?=$this->session->userdata("userid")?>">Wall</a></li>
         </ul>
         <ul class='nav navbar-nav navbar-right'>
