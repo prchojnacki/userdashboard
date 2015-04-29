@@ -36,8 +36,7 @@
     </div>
 </nav>
 
-<div class='container-fluid'>
-        
+<div class='container-fluid'>   
     <div class='row'>
         <h1 class='col-sm-9 col-sm-offset-1'>Edit profile</h1>
         <form action='/normaldashboard/index' method='post' class='col-sm-1'>
@@ -52,24 +51,24 @@
                 <div class='col-sm-12 form-group'>     
                     <label class='col-sm-4 control-label'>Email: </label>
                     <div class='col-sm-6'>
-                        <input class='form-control' type='email' name='email'>
+                        <input class='form-control' type='email' name='email' value='<?= $user['email']?>'>
                     </div>
                 </div>
                 <div class='col-sm-12 form-group'>
                     <label class='col-sm-4 control-label'>First Name: </label>
                     <div class='col-sm-6'>
-                        <input class='form-control' type='text' name='first_name'>
+                        <input class='form-control' type='text' name='first_name'value='<?= $user['first_name']?>'>
                     </div>
                 </div>
                 <div class='col-sm-12 form-group'>
                     <label class='col-sm-4 control-label'>Last Name: </label>
                     <div class='col-sm-6'>
-                        <input class='form-control' type='text' name='last_name'>
+                        <input class='form-control' type='text' name='last_name' value='<?= $user['last_name']?>'>
                     </div>
                 </div>
                 <div class='col-sm-10 form-group descriptionBox'>
                     <label for='description'>Edit Description: </label>
-                    <textarea id='description' class='form-control' name='description'></textarea>
+                    <textarea id='description' class='form-control' name='description' value='<?= $user['description']?>'></textarea>
                 </div>
                 <div class='form-group col-sm-12'>
                     <input class='btn btn-success col-sm-offset-8' type='submit' value='Save'>
@@ -81,22 +80,35 @@
             <h3 class='col-sm-offset-1'>Change Password</h3>
             <form action='/normaldashboard/update_password' method='post' class='form-horizontal'>
                 <div class='form-group col-sm-12'>
-                    <label class='col-sm-4 control-label'>Password: </label>
+                    <label class='col-sm-4 control-label'>Old Password: </label>
                     <div class='col-sm-5'>
-                        <input class='form-control' type='text' name='password'>
+                        <input class='form-control' type='password' name='old_password'>
+                    </div>
+                </div>
+                <div class='form-group col-sm-12'>
+                    <label class='col-sm-4 control-label'>New Password: </label>
+                    <div class='col-sm-5'>
+                        <input class='form-control' type='password' name='password'>
                     </div>
                 </div>
                 <div class='form-group col-sm-12'>
                     <label class='col-sm-4 control-label'>Confirm Password: </label>
                     <div class='col-sm-5'>
-                        <input class='form-control' type='text' name='confirm'>
+                        <input class='form-control' type='password' name='confirm'>
                     </div>
                 </div>
                 <div class='form-group col-sm-12'>
                     <input class='btn btn-success col-sm-offset-2' type='submit' value='Update Password'>
                 </div>
+                <div class='col-sm-12 col-sm-offset-1'>
+                <?php 
+                    if ($this->session->flashdata('incorrect_password')) { echo $this->session->flashdata('incorrect_password'); }
+                ?>
+                </div>
             </form>
+
         </div>
+
     </div>
 </div>
 </body>

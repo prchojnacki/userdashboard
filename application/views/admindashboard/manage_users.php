@@ -60,8 +60,12 @@
 									echo "normal";
 								} else echo "admin";
 							?></td>
-							<td><a href="/admindashboard/edit_user/<?= $user['id']?>">edit</a> <a href="/admindashboard/remove_user/<?= $user['id'] ?>">remove</a></td>
-						</tr>
+							<td>
+								<a href="/admindashboard/edit_user/<?= $user['id']?>">edit</a> 
+								<?php if ($user['id'] != $this->session->userdata('userid')) { ?>
+									<a href="/admindashboard/remove_user/<?= $user['id'] ?>">remove</a></td>
+								<?php } ?>
+							</tr>
 
 			<?php
 				}

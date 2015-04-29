@@ -63,7 +63,9 @@ class Signin extends CI_Model {
         return $this->db->query("UPDATE users SET password = ? WHERE id = ?", 
             array($password, $this->session->userdata('userid')));
     }
-
+    public function validate_password() {
+        return $this->db->query("SELECT password FROM users WHERE id = ?", $this->session->userdata('userid'))->row_array();
+    }
 
 
 }

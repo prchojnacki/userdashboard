@@ -17,8 +17,8 @@ class Normaldashboard extends CI_Controller {
     }
 
     public function editprofile() {
-
-        $this->load->view('normaldashboard/editprofile');
+        $user = $this->Signin->get_user_by_id($this->session->userdata('userid'));
+        $this->load->view('normaldashboard/editprofile', array('user' => $user));
     }
 
     public function update_profile(){
@@ -52,14 +52,22 @@ class Normaldashboard extends CI_Controller {
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
 
+        $this->form_validation->set_rules('old_password', 'Old Password', 'required|md5');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|md5');
         $this->form_validation->set_rules('confirm', 'Confirm Password', 'required|matches[password]');
 
         $path = '/normaldashboard/editprofile';
 
         if($this->form_validation->run()){
+            $stored_password = $this->Signin->validate_password();
+            if ($stored_password == set_value('old_password')) {
+
             $this->Signin->update_password(set_value('password'));
             redirect($path);
+            } else {
+                $this->session->set_flashdata('incorrect_password', 'Old password is incorrect.');
+                redirect($path);
+            }
         } else {
 
             redirect($path);

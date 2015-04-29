@@ -17,7 +17,6 @@
 <nav class='navbar navbar-default'>
     <div class='collapse navbar-collapse'>
         <ul class='nav navbar-nav'>
-            <li><a href=''>Test App</a></li>
             <li><a href='/admindashboard/index'>Dashboard</a></li>
             <li><a href="/normaldashboard/editprofile">Account</a></li>
             <li><a href="/normaldashboard/view_wall/<?=$this->session->userdata("userid")?>">Wall</a></li>
@@ -27,7 +26,6 @@
         </ul>
     </div>
 </nav>
-
 	<div class='container-fluid'>
 		<div class='row'>
 			<h1 class='col-sm-9 col-sm-offset-1'>Edit user #<?=$id?></h1>
@@ -81,13 +79,13 @@
 					<div class='form-group col-sm-12'>
 						<label class='col-sm-4 control-label'>Password: </label>
 						<div class='col-sm-5'>
-							<input class='form-control' type='text' name='password'>
+							<input class='form-control' type='password' name='password'>
 						</div>
 					</div>
 					<div class='form-group col-sm-12'>
 						<label class='col-sm-4 control-label'>Confirm Password: </label>
 						<div class='col-sm-5'>
-							<input class='form-control' type='text' name='confirm'>
+							<input class='form-control' type='password' name='confirm'>
 						</div>
 					</div>
 					<div class='form-group col-sm-12'>
